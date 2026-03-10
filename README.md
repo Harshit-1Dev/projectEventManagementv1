@@ -8,12 +8,7 @@ A full-cycle event registration and check-in portal for Tech Summit 2026.
 - **Database:** MySQL (laptop) / SQLite (phone)
 - **Hosting:** Android phone via Termux
 
-## Phase Progress
-- [x] Phase 1 — Project setup + Registration form
-- [ ] Phase 2 — QR code + Email confirmation
-- [ ] Phase 3 — Check-in screen
-- [ ] Phase 4 — CSS polish
-- [ ] Phase 5 — Admin login + Dashboard + PDF export
+
 
 ## How to Run
 
