@@ -1,4 +1,4 @@
-
+// Welcome.jsx
 import "../styles/components/shared.css";
 import "../styles/pages/pages.css";
 
