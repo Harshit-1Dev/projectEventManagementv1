@@ -12,14 +12,14 @@ export default function Home({ onNavigate, apiOnline }) {
         Register
       </button>
 
-      <button disabled
-        style={{ display: "block", width: "100%", padding: "12px", marginBottom: 10, fontSize: 15, cursor: "not-allowed", color: "#aaa" }}>
-        Check-In (Phase 3)
+      <button onClick={() => onNavigate("checkin")}
+        style={{ display: "block", width: "100%", padding: "12px", marginBottom: 10, fontSize: 15, cursor: "pointer" }}>
+        Check-In
       </button>
 
       <button disabled
         style={{ display: "block", width: "100%", padding: "12px", fontSize: 15, cursor: "not-allowed", color: "#aaa" }}>
-        Admin Login (Phase 5)
+        Admin Login
       </button>
     </div>
   );

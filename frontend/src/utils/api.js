@@ -9,4 +9,7 @@ const handle = async (res) => {
 export const api = {
   health:   ()     => fetch(`${BASE}/health`, { signal: AbortSignal.timeout(3000) }).then(handle),
   register: (body) => fetch(`${BASE}/register`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }).then(handle),
+  onspot:   (body)  => fetch(`${BASE}/onspot`,   { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }).then(handle),
+  search:   (q)     => fetch(`${BASE}/search?q=${encodeURIComponent(q)}`).then(handle),
+  checkin:  (regId) => fetch(`${BASE}/checkin/${regId}`, { method: "PUT" }).then(handle),
 };
