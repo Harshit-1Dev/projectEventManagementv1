@@ -39,10 +39,10 @@ export default function Register({ onBack, onSuccess }) {
       <h2 className="page-title">Register</h2>
       <p className="page-subtitle">Fill in your details. All fields are required.</p>
       <div className="card">
-        <Field label="Full Name"              name="name"    placeholder="e.g. Pratik Parashar" />
-        <Field label="Email Address"          name="email"   placeholder="e.g. pratik@company.com" type="email" />
+        <Field label="Full Name"              name="name"    placeholder="e.g. Steve Irwin" />
+        <Field label="Email Address"          name="email"   placeholder="e.g. crocodileMan@company.com" type="email" />
         <Field label="Phone Number"           name="phone"   placeholder="10-digit mobile" type="tel" />
-        <Field label="Company / Organisation" name="company" placeholder="e.g. TechSolutions Pvt Ltd" />
+        <Field label="Company / Organisation" name="company" placeholder="e.g. Your Company" />
         <div className="field">
           <label>City</label>
           <select value={form.city} onChange={e => set("city", e.target.value)} className={errors.city ? "err" : ""}>

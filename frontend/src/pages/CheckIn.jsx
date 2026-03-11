@@ -115,10 +115,10 @@ export default function CheckIn({ onBack, onCheckedIn, defaultTab = "qr" }) {
       {showSpot && (
         <div className="onspot-box">
           <p className="onspot-title">Register &amp; Check In Now</p>
-          {[["Full Name", "name", "text", "e.g. Pratik Parashar"],
-            ["Email Address", "email", "email", "e.g. pratik@company.com"],
+          {[["Full Name", "name", "text", "e.g. Steve Irwin"],
+            ["Email Address", "email", "email", "e.g. crocodileMan@company.com"],
             ["Phone Number", "phone", "tel", "10-digit mobile"],
-            ["Company / Organisation", "company", "text", "e.g. TechSolutions"]
+            ["Company / Organisation", "company", "text", "e.g. Your Company"]
           ].map(([label, field, type, placeholder]) => (
             <div key={field} className="field">
               <label>{label}</label>
