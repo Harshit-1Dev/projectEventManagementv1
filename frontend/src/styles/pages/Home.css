@@ -1,0 +1,5 @@
+/* Home.css */
+.home-brand    { font-size: 22px; font-weight: 900; margin-bottom: 4px; }
+.home-event    { color: #6366f1; font-size: 11px; letter-spacing: 2px; font-weight: 700; margin-bottom: 4px; }
+.home-tagline  { color: #94a3b8; font-size: 13px; margin-bottom: 32px; }
+.home-menu     { display: flex; flex-direction: column; gap: 10px; }
