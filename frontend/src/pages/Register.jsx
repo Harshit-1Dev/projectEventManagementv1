@@ -36,13 +36,13 @@ export default function Register({ onBack, onSuccess }) {
   return (
     <div className="page">
       <button className="back-btn" onClick={onBack}>← Back</button>
-      <h2 className="page-title">Register for the Event</h2>
-      <p className="page-subtitle">All fields are required.</p>
+      <h2 className="page-title">Register</h2>
+      <p className="page-subtitle">Fill in your details. All fields are required.</p>
       <div className="card">
-        <Field label="Full Name"              name="name"    placeholder="e.g. Narendra Modi" />
-        <Field label="Email Address"          name="email"   placeholder="e.g. Narendra@company.com" type="email" />
+        <Field label="Full Name"              name="name"    placeholder="e.g. Pratik Parashar" />
+        <Field label="Email Address"          name="email"   placeholder="e.g. pratik@company.com" type="email" />
         <Field label="Phone Number"           name="phone"   placeholder="10-digit mobile" type="tel" />
-        <Field label="Company / Organisation" name="company" placeholder="e.g. Manyata TechSolutions Pvt Ltd" />
+        <Field label="Company / Organisation" name="company" placeholder="e.g. TechSolutions Pvt Ltd" />
         <div className="field">
           <label>City</label>
           <select value={form.city} onChange={e => set("city", e.target.value)} className={errors.city ? "err" : ""}>
@@ -53,7 +53,7 @@ export default function Register({ onBack, onSuccess }) {
         </div>
         {apiError && <div className="error-box">{apiError}</div>}
         <button className="btn btn-primary" onClick={handleSubmit} disabled={loading}>
-          {loading ? "Registering..." : "Register"}
+          {loading ? "Registering..." : "Register →"}
         </button>
       </div>
     </div>

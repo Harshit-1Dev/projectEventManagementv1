@@ -1,11 +1,11 @@
 import { useState } from "react";
-import "../styles/pages/CheckIn.css";
 import "../styles/components/shared.css";
+import "../styles/pages/pages.css";
 import { api } from "../utils/api";
 import { CITIES, validateForm } from "../utils/helpers";
 
-export default function CheckIn({ onBack, onCheckedIn }) {
-  const [tab,      setTab]      = useState("qr");
+export default function CheckIn({ onBack, onCheckedIn, defaultTab = "qr" }) {
+  const [tab,      setTab]      = useState(defaultTab);
   const [regInput, setRegInput] = useState("");
   const [regError, setRegError] = useState("");
   const [searchQ,  setSearchQ]  = useState("");
@@ -55,30 +55,30 @@ export default function CheckIn({ onBack, onCheckedIn }) {
   return (
     <div className="page">
       <button className="back-btn" onClick={onBack}>← Back</button>
-      <h2 className="page-title">Event Check-In</h2>
-      <p className="page-subtitle">Select a check-in method.</p>
+      <h2 className="page-title">Check-In</h2>
+      <p className="page-subtitle">Verify your attendance.</p>
 
       <div className="tab-bar">
-        {[["qr", "With QR Code"], ["search", "Without QR Code"]].map(([t, l]) => (
-          <button key={t} className={`tab-btn ${tab === t ? "active" : ""}`}
-            onClick={() => { setTab(t); setRegError(""); setRegInput(""); setSearchQ(""); setResults([]); }}>
-            {l}
-          </button>
-        ))}
+        <button className={`tab-btn ${tab === "qr" ? "active" : ""}`} onClick={() => { setTab("qr"); setRegError(""); setRegInput(""); }}>
+          📷  With QR Code
+        </button>
+        <button className={`tab-btn ${tab === "search" ? "active" : ""}`} onClick={() => { setTab("search"); setSearchQ(""); setResults([]); }}>
+          🔍  Without QR Code
+        </button>
       </div>
 
       {tab === "qr" && (
         <div className="card">
           <div className="field">
-            <label>Registration ID</label>
+            <label>Enter Registration ID</label>
             <input value={regInput} className="reg-input"
               onChange={e => { setRegInput(e.target.value.toUpperCase()); setRegError(""); }}
               onKeyDown={e => e.key === "Enter" && handleQRCheckin()}
-              placeholder="e.g. GT1043ABX" />
+              placeholder="GT1043ABX" />
           </div>
           {regError && <div className="error-box">{regError}</div>}
           <button className="btn btn-primary" onClick={handleQRCheckin} disabled={loading}>
-            {loading ? "Checking in..." : "Check In"}
+            {loading ? "Checking in..." : "Check In →"}
           </button>
         </div>
       )}
@@ -102,23 +102,23 @@ export default function CheckIn({ onBack, onCheckedIn }) {
               }
             </div>
           ))}
-          {searchQ && results.length === 0 && <p style={{ color: "#94a3b8", fontSize: 13 }}>No results found.</p>}
+          {searchQ && results.length === 0 && <p style={{ color: "var(--grey)", fontSize: 13 }}>No results found.</p>}
         </div>
       )}
 
       <hr className="divider" />
 
-      <button className="btn btn-outline" onClick={() => setShowSpot(!showSpot)}>
-        {showSpot ? "Cancel" : "On-Spot Registration"}
+      <button className="btn btn-secondary" onClick={() => setShowSpot(!showSpot)}>
+        {showSpot ? "Cancel" : "🚀  On-Spot Registration"}
       </button>
 
       {showSpot && (
         <div className="onspot-box">
           <p className="onspot-title">Register &amp; Check In Now</p>
-          {[["Full Name", "name", "text", "e.g. Narendra Modi"],
-            ["Email Address", "email", "email", "e.g. Narendra@company.com"],
+          {[["Full Name", "name", "text", "e.g. Pratik Parashar"],
+            ["Email Address", "email", "email", "e.g. pratik@company.com"],
             ["Phone Number", "phone", "tel", "10-digit mobile"],
-            ["Company / Organisation", "company", "text", "e.g. Manyata TechSolutions Pvt Ltd"]
+            ["Company / Organisation", "company", "text", "e.g. TechSolutions"]
           ].map(([label, field, type, placeholder]) => (
             <div key={field} className="field">
               <label>{label}</label>
@@ -138,7 +138,7 @@ export default function CheckIn({ onBack, onCheckedIn }) {
           </div>
           {spotApi && <div className="error-box">{spotApi}</div>}
           <button className="btn btn-primary" onClick={handleOnspot} disabled={loading}>
-            {loading ? "Processing..." : "Register & Check In"}
+            {loading ? "Processing..." : "Register & Check In →"}
           </button>
         </div>
       )}

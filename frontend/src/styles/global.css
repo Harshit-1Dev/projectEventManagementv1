@@ -1,12 +1,49 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+:root {
+  --black:  #000000;
+  --ink:    #062F4F;
+  --posy:   #813772;
+  --embers: #882601;
+  --white:  #FFFFFF;
+  --grey:   #94a3b8;
+  --light:  #cbd5e1;
+  --card:   rgba(6, 47, 79, 0.85);
+  --radius: 12px;
+  --shadow: 0 4px 24px rgba(0,0,0,0.4);
+}
+
 body {
   font-family: 'Inter', 'Segoe UI', sans-serif;
-  background: #f8fafc;
-  color: #1e293b;
+  background: var(--black);
+  color: var(--white);
+  min-height: 100vh;
   -webkit-font-smoothing: antialiased;
 }
 
 button, input, select { font-family: inherit; }
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--black); }
+::-webkit-scrollbar-thumb { background: var(--ink); border-radius: 3px; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pop {
+  0%   { transform: scale(0.5); opacity: 0; }
+  70%  { transform: scale(1.1); }
+  100% { transform: scale(1);   opacity: 1; }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(-6px); }
+  40%       { transform: translateX(6px); }
+  60%       { transform: translateX(-4px); }
+  80%       { transform: translateX(4px); }
+}
