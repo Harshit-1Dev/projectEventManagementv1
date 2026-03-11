@@ -24,7 +24,7 @@ def build_email_body(att: dict) -> str:
     return f"""
     <div style="font-family: sans-serif; max-width: 520px; margin: 0 auto;">
       <h2>Registration Confirmed!</h2>
-      <p>Hi {att['name']}, you are registered for <strong>Tech Summit 2026, New Delhi</strong>.</p>
+      <p>Hi {att['name']}, you are registered for <strong>Tech Summit 2026, Bengaluru</strong>.</p>
 
       <table style="border-collapse: collapse; width: 100%; margin: 20px 0;">
         <tr><td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Registration ID</td><td style="padding: 8px; border: 1px solid #ddd; font-family: monospace; font-size: 18px;">{att['regId']}</td></tr>

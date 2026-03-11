@@ -12,4 +12,6 @@ export const api = {
   onspot:   (body)  => fetch(`${BASE}/onspot`,   { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }).then(handle),
   search:   (q)     => fetch(`${BASE}/search?q=${encodeURIComponent(q)}`).then(handle),
   checkin:  (regId) => fetch(`${BASE}/checkin/${regId}`, { method: "PUT" }).then(handle),
+  adminLogin:     (body) => fetch(`${BASE}/admin/login`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }).then(handle),
+  adminAttendees: ()     => fetch(`${BASE}/admin/attendees`).then(handle),
 };

@@ -5,7 +5,7 @@ import "../styles/global.css";
 export default function Home({ onNavigate, apiOnline }) {
   return (
     <div className="page">
-      <p className="home-event">TECH SUMMIT 2026 · NEW DELHI</p>
+      <p className="home-event">TECH SUMMIT 2026 · Bengaluru</p>
       <h1 className="home-brand">GroupThink Events</h1>
       <p className="home-tagline">Event Registration &amp; Check-In Portal</p>
       <div className={`api-dot ${apiOnline ? "online" : "offline"}`}>
