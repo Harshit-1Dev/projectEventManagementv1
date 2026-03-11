@@ -7,7 +7,7 @@ export default function Success({ attendee, onHome }) {
 
   return (
     <div className="page">
-      <div className="success-icon">🎉</div>
+      
       <h2 className="success-title">You're Registered!</h2>
       <p className="success-welcome">Welcome, <strong>{attendee.name}</strong></p>
 
@@ -21,7 +21,7 @@ export default function Success({ attendee, onHome }) {
           <img src={qrUrl} alt="QR Code" width={200} height={200} />
         </div>
         <p className="qr-hint">Show this QR at the venue for instant check-in</p>
-        <p className="email-sent">✓ Confirmation email sent to {attendee.email}</p>
+        <p className="email-sent">Confirmation email sent to {attendee.email}</p>
 
         <table className="detail-table">
           <tbody>

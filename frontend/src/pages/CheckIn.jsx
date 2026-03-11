@@ -4,6 +4,22 @@ import "../styles/pages/pages.css";
 import { api } from "../utils/api";
 import { CITIES, validateForm } from "../utils/helpers";
 
+function Field({ label, name, type, placeholder, form, setForm, errors }) {
+  return (
+    <div className="field">
+      <label>{label}</label>
+      <input
+        type={type || "text"}
+        value={form[name]}
+        placeholder={placeholder}
+        onChange={e => setForm(p => ({ ...p, [name]: e.target.value }))}
+        className={errors[name] ? "err" : ""}
+      />
+      {errors[name] && <p className="err-msg">{errors[name]}</p>}
+    </div>
+  );
+}
+
 export default function CheckIn({ onBack, onCheckedIn, defaultTab = "qr" }) {
   const [tab,      setTab]      = useState(defaultTab);
   const [regInput, setRegInput] = useState("");
@@ -15,8 +31,6 @@ export default function CheckIn({ onBack, onCheckedIn, defaultTab = "qr" }) {
   const [spotForm, setSpotForm] = useState({ name: "", email: "", phone: "", company: "", city: "" });
   const [spotErr,  setSpotErr]  = useState({});
   const [spotApi,  setSpotApi]  = useState("");
-
-  const setSpot = (f, v) => setSpotForm(p => ({ ...p, [f]: v }));
 
   const handleQRCheckin = async () => {
     const id = regInput.trim().toUpperCase();
@@ -47,7 +61,10 @@ export default function CheckIn({ onBack, onCheckedIn, defaultTab = "qr" }) {
     setSpotErr(errs); setSpotApi("");
     if (Object.keys(errs).length > 0) return;
     setLoading(true);
-    try { const res = await api.onspot({ ...spotForm, phone: spotForm.phone.replace(/\s/g, "") }); onCheckedIn(res.attendee); }
+    try {
+      const res = await api.onspot({ ...spotForm, phone: spotForm.phone.replace(/\s/g, "") });
+      onCheckedIn(res.attendee);
+    }
     catch (err) { setSpotApi(err.message); }
     finally { setLoading(false); }
   };
@@ -59,10 +76,12 @@ export default function CheckIn({ onBack, onCheckedIn, defaultTab = "qr" }) {
       <p className="page-subtitle">Verify your attendance.</p>
 
       <div className="tab-bar">
-        <button className={`tab-btn ${tab === "qr" ? "active" : ""}`} onClick={() => { setTab("qr"); setRegError(""); setRegInput(""); }}>
+        <button className={`tab-btn ${tab === "qr" ? "active" : ""}`}
+          onClick={() => { setTab("qr"); setRegError(""); setRegInput(""); }}>
           📷  With QR Code
         </button>
-        <button className={`tab-btn ${tab === "search" ? "active" : ""}`} onClick={() => { setTab("search"); setSearchQ(""); setResults([]); }}>
+        <button className={`tab-btn ${tab === "search" ? "active" : ""}`}
+          onClick={() => { setTab("search"); setSearchQ(""); setResults([]); }}>
           🔍  Without QR Code
         </button>
       </div>
@@ -71,10 +90,13 @@ export default function CheckIn({ onBack, onCheckedIn, defaultTab = "qr" }) {
         <div className="card">
           <div className="field">
             <label>Enter Registration ID</label>
-            <input value={regInput} className="reg-input"
+            <input
+              value={regInput}
+              className="reg-input"
               onChange={e => { setRegInput(e.target.value.toUpperCase()); setRegError(""); }}
               onKeyDown={e => e.key === "Enter" && handleQRCheckin()}
-              placeholder="GT1043ABX" />
+              placeholder="GT1043ABX"
+            />
           </div>
           {regError && <div className="error-box">{regError}</div>}
           <button className="btn btn-primary" onClick={handleQRCheckin} disabled={loading}>
@@ -87,7 +109,11 @@ export default function CheckIn({ onBack, onCheckedIn, defaultTab = "qr" }) {
         <div className="card">
           <div className="field">
             <label>Search by name or phone</label>
-            <input value={searchQ} onChange={e => handleSearch(e.target.value)} placeholder="Type to search..." />
+            <input
+              value={searchQ}
+              onChange={e => handleSearch(e.target.value)}
+              placeholder="Type to search..."
+            />
           </div>
           {results.map(att => (
             <div key={att.regId} className="result-card">
@@ -115,22 +141,17 @@ export default function CheckIn({ onBack, onCheckedIn, defaultTab = "qr" }) {
       {showSpot && (
         <div className="onspot-box">
           <p className="onspot-title">Register &amp; Check In Now</p>
-          {[["Full Name", "name", "text", "e.g. Steve Irwin"],
-            ["Email Address", "email", "email", "e.g. crocodileMan@company.com"],
-            ["Phone Number", "phone", "tel", "10-digit mobile"],
-            ["Company / Organisation", "company", "text", "e.g. Your Company"]
-          ].map(([label, field, type, placeholder]) => (
-            <div key={field} className="field">
-              <label>{label}</label>
-              <input type={type} value={spotForm[field]} placeholder={placeholder}
-                onChange={e => setSpot(field, e.target.value)}
-                className={spotErr[field] ? "err" : ""} />
-              {spotErr[field] && <p className="err-msg">{spotErr[field]}</p>}
-            </div>
-          ))}
+          <Field label="Full Name"              name="name"    placeholder="e.g. Steve Irwin"       form={spotForm} setForm={setSpotForm} errors={spotErr} />
+          <Field label="Email Address"          name="email"   placeholder="e.g. crocodileMan@company.com"   form={spotForm} setForm={setSpotForm} errors={spotErr} type="email" />
+          <Field label="Phone Number"           name="phone"   placeholder="10-digit mobile"            form={spotForm} setForm={setSpotForm} errors={spotErr} type="tel" />
+          <Field label="Company / Organisation" name="company" placeholder="e.g. Your Company"         form={spotForm} setForm={setSpotForm} errors={spotErr} />
           <div className="field">
             <label>City</label>
-            <select value={spotForm.city} onChange={e => setSpot("city", e.target.value)} className={spotErr.city ? "err" : ""}>
+            <select
+              value={spotForm.city}
+              onChange={e => setSpotForm(p => ({ ...p, city: e.target.value }))}
+              className={spotErr.city ? "err" : ""}
+            >
               <option value="">Select city...</option>
               {CITIES.map(c => <option key={c} value={c}>{c}</option>)}
             </select>
