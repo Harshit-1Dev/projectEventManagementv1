@@ -20,6 +20,18 @@ React frontend · FastAPI backend · MySQL
 
 ---
 
+## Features
+- Event registration with 5 fields
+- Auto-generated registration ID
+- QR code generation
+- Email confirmation
+- QR-based check-in
+- Manual search check-in
+- On-spot registration
+- Admin dashboard
+----
+
+
 ## Stack
 
 | Layer | What | Why |
