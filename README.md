@@ -1,4 +1,4 @@
-# GroupThink Events — Tech Summit 2026
+# GroupThink Events — Tech Summit Event
 
 Registration and check-in system built as a coding assignment for GroupThink.
 
